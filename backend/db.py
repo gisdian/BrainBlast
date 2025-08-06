@@ -1,15 +1,15 @@
 import sqlite3
-
+from models import Question
 
 conn = sqlite3.connect("example.db")
 cursor = conn.cursor()
 
 # Create simple table
 cursor.execute('''
-CREATE TABLE IF NOT EXISTS items (
-    id INTEGER PRIMARY KEY AUTOINCREMENT
-    name TEXT NOT NULL
-    quantity INTEGER NOT NULL
+CREATE TABLE IF NOT EXISTS questions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question TEXT NOT NULL,
+    correct BOOLEAN NOT NULL
 )
 ''')
 
@@ -37,26 +37,26 @@ def update_items(item_id, new_quantity):
 
 # DELETE
 def delete_item(item_id):
-    cursor.execute("DELETE FROM items WHERE id = ?", (item_id))
+    cursor.execute("DELETE FROM items WHERE id = ?", (item_id,))
     conn.commit()
     print("Item deleted")
 
 
 
 # DEMO
-if __name__ == "__main__":
-    create_item("Apple", 10)
-    create_item("Banana", 20)
-
-    print("\n All Items:")
-    read_items()
-
-    update_items(1, 15)
-
-    print("\n After Update:")
-    read_items()
-
-    delete_item(2)
-
-    print("\n After Delete")
-    read_items()
+# if __name__ == "__main__":
+#     create_item("Apple", 10)
+#     create_item("Banana", 20)
+#
+#     print("\n All Items:")
+#     read_items()
+#
+#     update_items(1, 15)
+#
+#     print("\n After Update:")
+#     read_items()
+#
+#     delete_item(2)
+#
+#     print("\n After Delete")
+#     read_items()
